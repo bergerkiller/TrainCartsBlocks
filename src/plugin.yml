@@ -1,0 +1,6 @@
+name: Train Carts Blocks
+main: com.bergerkiller.bukkit.tcb.TrainCartsBlocks
+version: 1.00
+author: bergerkiller
+description: Add-on for TrainCarts which adds action blocks
+depend: [BKCommonLib, Train Carts]
