@@ -23,9 +23,16 @@ import com.bergerkiller.bukkit.tc.TrainCarts;
 
 public abstract class BlockAction {
 	
+	public static void init(ConfigurationNode materials) {
+		register(materials, new BlockActionStation());
+		register(materials, new BlockActionEjector());
+		register(materials, new BlockActionElevator());
+	}
+	
 	private static Map<Material, BlockAction> blocks = new HashMap<Material, BlockAction>();
 	public static <T extends BlockAction> T register(Material material, T block) {
 		blocks.put(material, block);
+	    block.material = material;
 		return block;
 	}
 	public static <T extends BlockAction> T register(String matname, T block) {
@@ -43,10 +50,6 @@ public abstract class BlockAction {
 	
 	public static void deinit() {
 		blocks.clear();
-	}
-	public static void init(ConfigurationNode materials) {
-		register(materials, new BlockActionStation());
-		register(materials, new BlockActionEjector());
 	}
 		
 	public static BlockAction get(Material material) {
@@ -104,8 +107,12 @@ public abstract class BlockAction {
 	public boolean isPowerInverted() {
 		return this.invertPow;
 	}
+	public Material getMaterial() {
+		return this.material;
+	}
 	
 	private boolean invertPow = false;
+	private Material material = null;
 	private final BlockSet poweredBlocks = new BlockSet();
 	private final Set<MinecartGroup> activeGroups = new HashSet<MinecartGroup>();
 	private final Set<MinecartMember> activeMembers = new HashSet<MinecartMember>();
