@@ -8,7 +8,6 @@ import com.bergerkiller.bukkit.tc.TrainCarts;
 import com.bergerkiller.bukkit.tcb.blocks.BlockAction;
 
 public class TrainCartsBlocks extends PluginBase {
-
 	@Override
 	public void permissions() {
 	}
@@ -24,6 +23,11 @@ public class TrainCartsBlocks extends PluginBase {
 		config.setHeader("blocks", "\nConfiguration for individual action blocks can be set below");
 		BlockAction.init(config.getNode("blocks"));
 		config.save();
+	}
+
+	@Override
+	public int getMinimumLibVersion() {
+		return 1;
 	}
 
 	@Override

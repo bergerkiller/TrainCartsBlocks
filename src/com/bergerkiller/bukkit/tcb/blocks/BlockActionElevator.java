@@ -7,7 +7,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import com.bergerkiller.bukkit.common.permissions.NoPermissionException;
-import com.bergerkiller.bukkit.tc.MinecartMember;
+import com.bergerkiller.bukkit.tc.controller.MinecartMember;
 import com.bergerkiller.bukkit.tc.Permission;
 import com.bergerkiller.bukkit.tc.Util;
 import com.bergerkiller.bukkit.tc.signactions.SignActionElevator;
@@ -59,7 +59,7 @@ public class BlockActionElevator extends BlockAction {
 	@Override
 	public void onRedstoneChange(Block block, boolean powered) {
 		if (powered != this.isPowerInverted()) {
-			MinecartMember mm = MinecartMember.getAt(block.getRelative(BlockFace.UP), true);
+			MinecartMember mm = MinecartMember.getAt(block.getRelative(BlockFace.UP));
 			if (mm != null) {
 				doElevator(block, mm);
 			}
