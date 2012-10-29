@@ -16,29 +16,30 @@ import com.bergerkiller.bukkit.common.Task;
 import com.bergerkiller.bukkit.common.config.ConfigurationNode;
 import com.bergerkiller.bukkit.common.permissions.NoPermissionException;
 import com.bergerkiller.bukkit.common.utils.BlockUtil;
-import com.bergerkiller.bukkit.common.utils.EnumUtil;
+import com.bergerkiller.bukkit.common.utils.ParseUtil;
 import com.bergerkiller.bukkit.tc.controller.MinecartGroup;
 import com.bergerkiller.bukkit.tc.controller.MinecartMember;
 import com.bergerkiller.bukkit.tc.TrainCarts;
 
 public abstract class BlockAction {
-	
+	private static Map<Material, BlockAction> blocks = new HashMap<Material, BlockAction>();
+
 	public static void init(ConfigurationNode materials) {
 		register(materials, new BlockActionStation());
 		register(materials, new BlockActionEjector());
 		register(materials, new BlockActionElevator());
 	}
-	
-	private static Map<Material, BlockAction> blocks = new HashMap<Material, BlockAction>();
+
 	public static <T extends BlockAction> T register(Material material, T block) {
 		blocks.put(material, block);
 	    block.material = material;
 		return block;
 	}
+
 	public static <T extends BlockAction> T register(String matname, T block) {
 		Material mat = block.getDefaultMaterial();
 		if (matname != null && matname.length() > 0) {
-			mat = EnumUtil.parseMaterial(matname, mat);
+			mat = ParseUtil.parseMaterial(matname, mat);
 		}
 		return register(mat, block);
 	}

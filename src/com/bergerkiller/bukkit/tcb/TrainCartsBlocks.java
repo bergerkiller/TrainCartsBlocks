@@ -15,7 +15,6 @@ public class TrainCartsBlocks extends PluginBase {
 	@Override
 	public void enable() {
 		this.register(TCBListener.class);
-		
 		FileConfiguration config = new FileConfiguration(TrainCarts.plugin, "blocks.yml");
 		config.load();
 		config.setHeader("This is the configuration of the Blocks add-on of TrainCarts.");

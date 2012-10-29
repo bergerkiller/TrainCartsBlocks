@@ -32,7 +32,7 @@ public class TCBListener implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event) {
 		if (!event.isCancelled()) {
 			Block block = event.getBlock();
-			if (Util.isRails(block)) {
+			if (Util.ISTCRAIL.get(block)) {
 				block = block.getRelative(BlockFace.DOWN);
 				BlockAction ba = BlockAction.get(block);
 				if (ba != null) {
